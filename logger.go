@@ -35,12 +35,12 @@ type Logger struct {
 	deb   *log.Logger
 }
 
-func (l *Logger) Error(format string, v ...interface{}) {
+func (l *Logger) Error(err error) {
 	if LevelError > l.level {
 		return
 	}
 
-	s := fmt.Sprintf(format, v...)
+	s := err.Error()
 	l.err.Output(2, s)
 	panic(s)
 }
